@@ -22,6 +22,15 @@ async function getSiswaById(id: string) {
   return result[0] ?? null;
 }
 
+function InfoItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-xs font-semibold text-indigo-500 uppercase tracking-wide mb-1">{label}</dt>
+      <dd className="text-slate-800">{value}</dd>
+    </div>
+  );
+}
+
 export default async function ProfilSiswa({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const siswa = await getSiswaById(id);
@@ -33,11 +42,11 @@ export default async function ProfilSiswa({ params }: { params: Promise<{ id: st
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-12">
       <div className="max-w-2xl mx-auto">
-        <Link href="/siswa" className="text-sm text-slate-500 hover:underline mb-6 inline-block">
+        <Link href="/siswa" className="text-sm text-indigo-600 hover:underline mb-6 inline-block">
           ← Kembali ke Daftar Siswa
         </Link>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
           <div className="relative w-full aspect-video bg-slate-100">
             {siswa.foto && (
               <Image
@@ -51,37 +60,22 @@ export default async function ProfilSiswa({ params }: { params: Promise<{ id: st
           </div>
 
           <div className="p-8">
-            <h1 className="text-2xl font-bold text-slate-900">{siswa.nama_lengkap}</h1>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">{siswa.nama_lengkap}</h1>
             {siswa.nama_panggilan && (
-              <p className="text-slate-500 mb-4">&ldquo;{siswa.nama_panggilan}&rdquo;</p>
+              <p className="text-indigo-500 font-medium mb-2">&ldquo;{siswa.nama_panggilan}&rdquo;</p>
             )}
 
-            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-              <div>
-                <dt className="text-xs font-medium text-slate-400 uppercase">Kelas</dt>
-                <dd className="text-slate-800">{siswa.kelas}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium text-slate-400 uppercase">Keahlian</dt>
-                <dd className="text-slate-800">{siswa.keahlian ?? '-'}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium text-slate-400 uppercase">Skill</dt>
-                <dd className="text-slate-800">{siswa.skill ?? '-'}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium text-slate-400 uppercase">Minat / Hobi</dt>
-                <dd className="text-slate-800">{siswa.minat_hobi ?? '-'}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-medium text-slate-400 uppercase">Cita-cita</dt>
-                <dd className="text-slate-800">{siswa.cita_cita ?? '-'}</dd>
-              </div>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+              <InfoItem label="Kelas" value={siswa.kelas} />
+              <InfoItem label="Keahlian" value={siswa.keahlian ?? '-'} />
+              <InfoItem label="Skill" value={siswa.skill ?? '-'} />
+              <InfoItem label="Minat / Hobi" value={siswa.minat_hobi ?? '-'} />
+              <InfoItem label="Cita-cita" value={siswa.cita_cita ?? '-'} />
             </dl>
 
-            <div className="mt-6 pt-6 border-t border-slate-100">
-              <dt className="text-xs font-medium text-slate-400 uppercase mb-2">Deskripsi</dt>
-              <dd className="text-slate-700 leading-relaxed">{siswa.deskripsi ?? '-'}</dd>
+            <div className="mt-8 pt-6 border-t border-slate-100">
+              <p className="text-xs font-semibold text-indigo-500 uppercase tracking-wide mb-2">Deskripsi</p>
+              <p className="text-slate-700 leading-relaxed">{siswa.deskripsi ?? '-'}</p>
             </div>
           </div>
         </div>
