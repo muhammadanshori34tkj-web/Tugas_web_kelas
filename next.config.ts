@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-<<<<<<< HEAD
-  /* config options here */
-=======
   poweredByHeader: false,
   async headers() {
     return [
@@ -21,7 +18,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
->>>>>>> fec648e (Web Kelas)
 };
 
 export default nextConfig;

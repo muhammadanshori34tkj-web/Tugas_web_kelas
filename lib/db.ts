@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import mysql from 'mysql2/promise';
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 5,
-  queueLimit: 0,
-});
-
-export default pool;
-=======
 import "server-only";
 
 import mysql, { type Pool } from "mysql2/promise";
@@ -67,4 +51,3 @@ export async function checkDatabaseConnection(): Promise<void> {
   const connection = await getDatabasePool().getConnection();
   connection.release();
 }
->>>>>>> fec648e (Web Kelas)
