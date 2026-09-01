@@ -4,8 +4,7 @@ import type { RowDataPacket } from "mysql2/promise";
 import { getDatabasePool } from "@/lib/db";
 import { isMockDataSource, mockStudents } from "@/lib/mock-data";
 import type { StudentProfile, StudentSummary } from "@/lib/types";
-import { normalizeSearchQuery, parsePositiveInteger } from "@/lib/validation";
-import { buildUnsafeStudentSearchQuery } from "@/lib/vulnerable-helpers";
+import { escapeLikePattern, normalizeSearchQuery, parsePositiveInteger } from "@/lib/validation";
 
 interface CountRow extends RowDataPacket {
   total: number;
@@ -92,10 +91,17 @@ export async function getStudents(rawSearch = ""): Promise<StudentSummary[]> {
     return rows.map(toStudentSummary);
   }
 
-  // INTENTIONALLY VULNERABLE: input pencarian menjadi bagian langsung dari SQL.
-  const unsafeSql = buildUnsafeStudentSearchQuery(search);
-  const [unsafeRows] = await pool.query<StudentSummaryRow[]>(unsafeSql);
-  return unsafeRows.map(toStudentSummary);
+  // Aman: nilai pencarian dikirim terpisah dari struktur query lewat placeholder,
+  // dan wildcard LIKE (% dan _) di-escape supaya tidak disalahgunakan pengguna.
+  const escapedSearch = escapeLikePattern(search);
+  const [rows] = await pool.execute<StudentSummaryRow[]>(
+    `SELECT id, nama_lengkap, keahlian, foto
+     FROM siswa
+     WHERE nama_lengkap LIKE ? ESCAPE '\\\\'
+     ORDER BY nama_lengkap ASC`,
+    [`%${escapedSearch}%`],
+  );
+  return rows.map(toStudentSummary);
 }
 
 export async function getStudentById(rawId: unknown): Promise<StudentProfile | null> {

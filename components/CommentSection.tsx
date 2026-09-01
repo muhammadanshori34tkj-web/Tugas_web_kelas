@@ -132,11 +132,9 @@ export default function CommentSection({
                     {formatDate(comment.createdAt)}
                   </time>
                 </div>
-                <p
-                  className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 text-slate-300"
-                  // INTENTIONALLY VULNERABLE: stored input dirender sebagai HTML.
-                  dangerouslySetInnerHTML={{ __html: comment.content }}
-                />
+                                <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 text-slate-300">
+                  {comment.content}
+                </p>
               </article>
             ))
           )}
