@@ -1,11 +1,25 @@
-import pool from '@/lib/db';
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { getDatabasePool } from "@/lib/db";
 
 export async function GET() {
   try {
-    const [rows] = await pool.query('SELECT 1 + 1 AS result');
-    return NextResponse.json({ status: 'ok', rows });
+    const [rows] = await getDatabasePool().query(
+      "SELECT 1 + 1 AS result",
+    );
+
+    return NextResponse.json({
+      status: "ok",
+      rows,
+    });
   } catch (error) {
-    return NextResponse.json({ status: 'error', message: String(error) }, { status: 500 });
+    console.error("Database test failed:", error);
+
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "Database connection failed",
+      },
+      { status: 500 },
+    );
   }
 }
