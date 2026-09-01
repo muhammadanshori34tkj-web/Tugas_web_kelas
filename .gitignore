@@ -33,3 +33,6 @@ next-env.d.ts
 
 # Vercel
 .vercel
+
+database_dump.sql
+public/uploads/siswa/
