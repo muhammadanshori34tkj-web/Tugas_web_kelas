@@ -2,11 +2,24 @@
   "name": "tugas-web-tkj3",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
+=======
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start",
+    "db:check": "node --env-file=.env.local scripts/check-db.mjs",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "check": "npm run lint && npm run typecheck && npm test"
+>>>>>>> fec648e (Web Kelas)
   },
   "dependencies": {
     "mysql2": "^3.24.2",
