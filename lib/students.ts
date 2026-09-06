@@ -123,3 +123,16 @@ export async function getStudentById(rawId: unknown): Promise<StudentProfile | n
 
   return rows[0] ? toStudentProfile(rows[0]) : null;
 }
+
+export async function getStudentsWithPhotos(): Promise<StudentSummary[]> {
+  if (isMockDataSource()) return mockStudents.filter((s) => s.foto);
+
+  const [rows] = await getDatabasePool().execute<StudentSummaryRow[]>(
+    `SELECT id, nama_lengkap, keahlian, foto
+     FROM siswa
+     WHERE foto IS NOT NULL AND foto <> ''
+     ORDER BY nama_lengkap ASC`,
+  );
+
+  return rows.map(toStudentSummary);
+}

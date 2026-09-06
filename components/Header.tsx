@@ -10,17 +10,17 @@ const navigation = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-      <div className="mx-auto flex min-h-18 max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
+    <header className="glass-surface sticky top-0 z-50 border-b border-black/[0.06]">
+      <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
         <Link href="/" className="group flex min-w-0 items-center gap-3">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-slate-950 text-sm font-black text-white shadow-lg shadow-slate-300 transition-transform group-hover:-rotate-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[var(--accent)] text-sm font-semibold text-white transition-transform group-hover:scale-105">
             3
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-sm font-extrabold tracking-tight text-slate-950">
+            <span className="block truncate text-sm font-semibold tracking-tight text-[var(--foreground)]">
               {siteConfig.className}
             </span>
-            <span className="block truncate text-[0.68rem] font-semibold uppercase tracking-[0.17em] text-slate-500">
+            <span className="block truncate text-[0.68rem] font-medium uppercase tracking-[0.14em] text-black/40">
               Class Portfolio
             </span>
           </span>
@@ -31,7 +31,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+              className="rounded-full px-4 py-2 text-sm font-medium text-black/60 transition hover:bg-black/[0.04] hover:text-[var(--foreground)]"
             >
               {item.label}
             </Link>
@@ -40,7 +40,7 @@ export default function Header() {
 
         <Link
           href="/siswa"
-          className="shrink-0 rounded-full bg-emerald-400 px-4 py-2.5 text-sm font-extrabold text-slate-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 sm:px-5"
+          className="shrink-0 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-[var(--accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-5"
         >
           Jelajahi profil
         </Link>
@@ -48,13 +48,13 @@ export default function Header() {
 
       <nav
         aria-label="Navigasi seluler"
-        className="flex gap-1 overflow-x-auto border-t border-slate-100 px-4 py-2 md:hidden"
+        className="flex gap-1 overflow-x-auto border-t border-black/[0.06] px-4 py-2 md:hidden"
       >
         {navigation.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+            className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium text-black/60 hover:bg-black/[0.04] hover:text-[var(--foreground)]"
           >
             {item.label}
           </Link>
