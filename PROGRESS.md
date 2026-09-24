@@ -13,6 +13,7 @@
 - Security headers dasar.
 - Skema database, migration komentar, contoh seed, dan dokumentasi keamanan.
 - Automated test untuk validasi SQL input, XSS input, dan path traversal.
+- Dokumentasi setup Docker untuk lingkungan praktikum.
 
 ## Branch `vulnerable`
 
